@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../css/style-old.css">
+	<link rel="stylesheet" href="../css/page-style.css">
+	<script src="https://kit.fontawesome.com/6d3e23c906.js" crossorigin="anonymous"></script>
+	<title>Lower Third Editável - Niko!</title>
+</head>
+<body>
+
+	<div class="container">
+
+		<div class="page-header">
+			<a href="../"><img src="../img/nikoLogo.png" class="logo"></a>
+
+			<ul class="redes">
+				<li><a href="../"><i class="fas fa-home"></i></a></li>
+				<li><a href="https://twitter.com/nikopink_" target="_blank"><i class="fab fa-twitter"></i></a></li>
+			</ul>
+		</div>
+
+		<div class="content">
+			
+			<p>Há um tempo, fiz um trabalho para o <a href="../edicao/canal90">Canal 90</a> que consistia de 2 transições e um lower third editável, com base na identidade que o canal já tinha.<br><br>
+
+			As transições não têm nada demais, só precisei gastar um tempo no Photoshop para criar e combinar as formas e texturas (Bauhaus/Memphis pode ser mais complicado do que parece, às vezes) e depois animar e sonorizar.</p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90Trans.webm" type="video/webm">
+			</video>
+			<legend>Transições e lower third em ação. Clique em qualquer um dos vídeos desta página para pausá-los.</legend>
+
+			<p>O lower third, por outro lado, tinha uma particularidade que me fez quebrar a cabeça: os elementos que acompanhavam o texto deveriam obedecer a largura do retângulo principal. Juro que não achei nada sobre isso na época - não achei até hoje, inclusive - então precisei botar a cabecinha pra funcionar e achei que seria legal deixar público pra quem quisesse usar. Caso alguém saiba de outra forma de atingir o mesmo objetivo, me manda uma DM no Twitter. Não precisa nem ser mais fácil, só diferente, por curiosidade.</p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90Lower.webm" type="video/webm">
+			</video>
+
+			<p>Acho que é melhor começarmos pelo mais fácil: a parte central. Caso você não tenha familiaridade com lower thirds editáveis no After Effects, a expressão que a gente usa é <span class="mono">sourceRectAtTime()</span>. <br><br>
+
+			Basicamente, é só criar um texto e um Rectangle Path por trás. Quando a expressão for aplicada, o retângulo automaticamente vai obedecer ao tamanho do texto.</p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90SourceRect.webm" type="video/webm">
+			</video>
+			<legend>Caso esteja muito apertado pro seu gosto, é só adicionar uns valores ao tamanho</legend>
+
+			<p>A única coisa que eu fiz a mais foi alterar o Skew do retângulo, para deixar nem tão retangular, e a Rotation. Isso tira um pouco da dureza que a forma retangular naturalmente tem. E apliquei um Drop Shadow.</p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90Skew.webm" type="video/webm">
+			</video>
+			<legend>Caso estejam copiando: Skew 10, Rotation -0,5</legend>
+
+			<p>Para uma explicação mais detalhada sobre <span class="mono">sourceRectAtTime()</span>, eu recomendo <a href="https://www.youtube.com/watch?v=In4miXUdxko" target="_blank">este vídeo do ECAbrams</a>. Aliás, o canal inteiro desse cara é muito bom pra quem gosta de brincar com expressões e animações procedurais no After Effects. </p>
+
+			<hr>
+
+			<p>Ok, agora vamos ao motivo pelo qual você está aqui e vamos falar dos elementos. Novamente: a nossa ideia aqui é fazer os elementos continuarem nas bordas do retângulo independente do tamanho dele. <br><br>
+
+			A minha ideia (que funcionou; tiveram outras que não funcionaram) foi capturar de alguma forma a distância do centro até uma das bordas do retângulo e usar esse valor como referência para o elemento. Isso aqui é mais matemática do que de fato Javascript ou After Effects.<br><br>
+
+			O jeito que eu encontrei foi ligar o Size do retângulo à posição do elemento. Nesse caso, <span class="mono">size[0]</span>, afinal só estamos mexendo no eixo X. </p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90Parent.webm" type="video/webm">
+			</video>
+
+			<p>Quase isso. Se a gente pegar esse valor do Size, somar à largura da composição (como essa é uma composição em Full HD, 1920px) e dividir tudo por 2, o resultado é a posição da borda do retângulo. Exatamente o que a gente precisa.</p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90Metade.webm" type="video/webm">
+			</video>
+
+			<span class="code">
+				temp = thisComp.layer("rectangle").content("Rectangle 1").content("Rectangle Path 1").size[0];<br>
+				metade = (temp+1920)/2;<br>
+				[metade, value[1]]
+			</span>
+
+			<p>Essa é a expressão completa. Lembre-se de alterar os nomes entre aspas de acordo com o nome da sua layer. Caso queira que o elemento fique do lado esquerdo, altere a segunda linha de <span class="mono">temp</span> para <span class="mono">-temp</span></p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90MenosTemp.webm" type="video/webm">
+			</video>
+
+			<hr>
+
+			<p>Graças ao <a href="https://twitter.com/abiscoitadooo" target="_blank">Abiscoitado</a>, existe uma versão atualizada dessa expressão que funciona tanto no eixo X quanto no eixo Y. Aproveitei e dei nomes mais fáceis de entender para as variáveis.</p>
+
+			<span class="code">
+				x = thisComp.layer("shape").content("Rectangle 1").content("Rectangle Path 1").size[0];<br>
+				y = thisComp.layer("shape").content("Rectangle 1").content("Rectangle Path 1").size[1];<br>
+				metadeX = (x + 1920) / 2;<br>
+				metadeY = (y + 1080) / 2;<br>
+				[metadeX, metadeY]
+			</span>
+
+			<p>O princípio é o mesmo. Alterar os nomes das layers para ficar de acordo e usar <span class="mono">x</span>, <span class="mono">-x</span>, <span class="mono">y</span> e <span class="mono">-y</span> de acordo com a necessidade. Não se esqueça de alterar os valores de <span class="mono">metadeX</span> e <span class="mono">metadeY</span> de acordo com as dimensões do seu projeto.</p>
+
+			<video class="page-video" autoplay muted loop onclick="this.paused ? this.play() : this.pause();">
+				<source src="../img/c90/c90DoisEixos.webm" type="video/webm">
+			</video>
+
+			<p>Espero ter ajudado! Algumes amigues já fizeram uso dessa minha expressão em lower thirds para uso próprio ou para clientes e eu acho muito legal poder ter ajudado. Assim que possível, vou adicionar alguns exemplos aqui.<br><br>
+
+			Caso tenha alguma dúvida ou queira me mostrar o que fez com a expressão, pode me mandar uma DM ou mention no <a href="https://twitter.com/nikopink_" target="_blank">Twitter</a>!</p>
+
+		</div>
+
+		<div class="footer">
+			Niko • 2022
+		</div>
+
+	</div>
+
+</body>
+</html>
