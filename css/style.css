@@ -62,27 +62,8 @@ a {
 	color: #f4f9fa;
 }
 
-.redes-list {
-	margin-top: -10px;
-}
-
-.redes-list li {
-	display: inline;
-	font-size: 1.8em;
-	padding: 0 15px 0 15px;
-}
-
-.redes-list li a {
-	transition: 0.15s ease-in-out;
-}
-
-.redes-list li a:hover {
-	color: #ea14ee;
-	text-shadow: 0 0 25px rgba(255, 255, 255, 0.2);
-}
-
 .menu-list {
-	margin-top: 60px;
+	margin-top: 30px;
 	font-weight: 700;
 	font-kerning: normal;
 
@@ -115,19 +96,30 @@ a {
 }
 
 .sidebar-footer {
+	width: calc(20vw + 100px);
+	position: fixed;
+	bottom: 50px;
+
 	text-align: center;
+}
+
+.footer-botoes {
+	width: 100%;
+	padding: 20px 30px;
+	box-sizing: border-box;
+	margin-bottom: 10px;
+}
+
+.footer-botoes li {
+	display: inline;
+}
+
+.footer-credits {
 	width: calc(20vw + 100px);
 	font-weight: 500;
 	color: #f4f9fa;
 
 	text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
-
-	display: flex;
-	align-items: center;
-	justify-content: center;
-
-	position: absolute;
-	bottom: 50px;
 }
 
 /*corpo*/
@@ -329,6 +321,8 @@ a {
 
 .meu-botao {
 	padding: 10px 25px;
+	margin-top: 5px;
+	display: block;
 }
 
 .meu-botao textarea {
@@ -883,6 +877,40 @@ hr {
 	background: #f4f9fa;
 }
 
+/*página: fotos*/
+
+.foto-ano {
+	margin-bottom: 25px;
+	padding: 6px 12px;
+
+	color: #ea14ee;
+	border-bottom: 1px solid #ea14ee;
+
+	font-size: 22pt;
+}
+
+.foto-grid {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+	margin-bottom: 15px;
+}
+
+.foto-grid a {
+	transition: ease-out 0.2s;
+}
+
+.foto-grid a:hover {
+	transform: scale(1.05);
+}
+
+.foto-grid a img {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+	border-radius: 5px;
+}
+
 /*animação*/
 
 @keyframes grid-move {
@@ -934,10 +962,6 @@ hr {
 		background: linear-gradient(rgba(0, 0, 0, 0.0) 50%, black);
 	}
 
-	.sidebar-footer {
-		display: none;
-	}
-
 	/*redes*/
 
 	.redes-list {
@@ -987,14 +1011,22 @@ hr {
 		box-shadow: none;
 	}
 
+	.sidebar-footer {
+		width: 100vw;
+		position: relative;
+		top: 15px;
+		margin-bottom: 50px;
+	}
+
 	/*corpo*/
 
 	.corpo-borda {
 		position: relative;
 		margin: 10px;
 
-		width: calc(100vw - 20px);
+		width: calc(100vw - 30px);
 		margin-top: 0;
+		box-sizing: border-box;
 	}
 
 	/*grid*/
@@ -1034,6 +1066,17 @@ hr {
 		height: 30px;
 		position: relative;
 		bottom: 0;
+	}
+
+	/*pagina: fotos*/
+
+	.foto-grid {
+		justify-content: center;
+	}
+
+	.foto-grid a img {
+		width: 150px;
+		height: 150px;
 	}
 
 }
