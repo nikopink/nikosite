@@ -359,12 +359,14 @@ a {
 }
 
 .home-right legend {
+	text-align: right;
 	padding: 5px 8px;
 	font-size: 10pt;
 }
 
 .home-right legend a {
-	color: rgba(255, 255, 255, 0.4);
+	color: rgba(255, 255, 255, 0.5);
+	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 	transition: 0.1s ease-in-out;
 }
 
@@ -386,6 +388,7 @@ a {
 .capa-grid {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
 }
 
 .grid-item {
@@ -523,10 +526,12 @@ a {
 
 .album-page-cover {
 	height: 700px;
+	max-width: 750px;
 }
 
 .album-info {
-	min-width: 515px;
+	width: 35vw;
+	max-width: 750px;
 	height: 700px;
 	display: flex;
 	flex-direction: column;
@@ -655,7 +660,7 @@ a {
 }
 
 .video-right {
-	width: calc(35% - 50px);
+	width: calc(35% - 35px);
 }
 
 .canais-list {
@@ -815,100 +820,65 @@ hr {
 }
 
 .links {
-	max-width: 1000px;
-
-	margin: 0 auto;
 	box-sizing: border-box;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
 
 	position: relative;
 	z-index: 2;
-
-	/*background-color: darkcyan;*/
 }
 
 .links-logo {
-	max-width: 600px;
-	margin: 0 auto;
-}
-
-.links-lista {
-	padding-top: 50px;
-	text-align: center;
-	list-style-type: none;
-
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	gap: 20px;
-}
-
-.links-lista li {
-	color: #f4f9fa;
-	background: rgba(0, 0, 0, 0.1);
-	font-size: 16pt;
-	font-weight: 500;
-
-	padding: 15px 15px;
-	width: 180px;
-	height: 180px;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	border: 1px solid #f4f9fa;
-
-	transition: 0.1s ease-in-out;
-}
-
-.links-lista i {
-	font-size: 70pt;
-}
-
-.links-lista li:hover {
-	color: #281653;
-	background: #f4f9fa;
-}
-
-/*página: fotos*/
-
-.foto-ano {
+	max-width: 520px;
 	margin-bottom: 25px;
-	padding: 6px 12px;
-
-	color: #ea14ee;
-	border-bottom: 1px solid #ea14ee;
-
-	font-size: 22pt;
 }
 
-.foto-grid {
-	display: flex;
-	gap: 20px;
-	flex-wrap: wrap;
-	margin-bottom: 15px;
+.links-lista li a {
+	display: block;
+	width: 630px;
+	padding: 10px;
+	margin-bottom: 10px;
+
+	font-weight: 600;
+	font-size: 1.6em;
+
+	color: rgba(40, 22, 83, 1.0);
+	background: #f4f9fa;
+	border-radius: 0 0 0 10px;
+
+	transition: ease-in-out 0.15s;
 }
 
-.foto-grid a {
-	transition: ease-out 0.2s;
+.links-lista li a:hover {
+	color: #f4f9fa;
+	background: #ea14ee;
+
+	transform: translateX(7px);
 }
 
-.foto-grid a:hover {
-	transform: scale(1.05);
+.links-sona {
+	height: 90vh;
+	max-height: 820px;
+	min-height: 580px;
+	z-index: 2;
+
+	margin-left: -150px;
 }
 
-.foto-grid a img {
-	width: 200px;
-	height: 200px;
-	object-fit: cover;
-	border-radius: 5px;
+.links-credits {
+	color: #f4f9fa;
+	font-style: italic;
+	font-size: 10pt;
+	margin-top: -28px;
+	margin-bottom: 7px;
+
+	width: 575px;
+	display: block;
+	text-align: left;
+
+	transition: ease-in-out 0.15s;
+}
+
+.links-credits:hover {
+	color: #08f1f5;
 }
 
 /*animação*/
@@ -944,7 +914,7 @@ hr {
 	.sidebar {
 		width: 100vw;
 		height: auto;
-		padding: 50px;
+		padding: 50px 50px 30px 50px;
 		position: relative;
 
 		display: flex;
@@ -960,12 +930,6 @@ hr {
 	.sidebar::after {
 		z-index: 0;
 		background: linear-gradient(rgba(0, 0, 0, 0.0) 50%, black);
-	}
-
-	/*redes*/
-
-	.redes-list {
-		display: none;
 	}
 
 	/*menu*/
@@ -1024,9 +988,25 @@ hr {
 		position: relative;
 		margin: 10px;
 
-		width: calc(100vw - 30px);
+		width: calc(100vw - 20px);
 		margin-top: 0;
 		box-sizing: border-box;
+	}
+
+	.conteudo {
+		padding: 20px;
+	}
+
+	.home-right {
+		height: 121vw !important;
+		background-size: cover !important;
+	}
+
+	.big-title {
+		font-size: 3.5em;
+		margin-top: 0;
+		margin-bottom: 20px;
+		line-height: 1.1em;
 	}
 
 	/*grid*/
@@ -1047,6 +1027,9 @@ hr {
 	.album-page {
 		flex-direction: row;
 		height: 100%;
+
+		width: calc(100vw - 20px);
+		margin: 10px;
 	}
 
 	.album-page-cover {
@@ -1055,9 +1038,11 @@ hr {
 	}
 
 	.album-info {
-		min-width: auto;
-		width: 100%;
-		height: auto;
+		width: 100vw !important;
+	}
+
+	.album-info h1 {
+		font-size: 2.5em !important;
 	}
 
 	.bottom-gap {
@@ -1068,20 +1053,9 @@ hr {
 		bottom: 0;
 	}
 
-	/*pagina: fotos*/
-
-	.foto-grid {
-		justify-content: center;
-	}
-
-	.foto-grid a img {
-		width: 150px;
-		height: 150px;
-	}
-
 }
 
-@media (max-width: 750px) {
+@media (max-width: 900px) {
 
 	.header-menu {
 		display: none;
@@ -1089,22 +1063,67 @@ hr {
 
 	/* página: links */
 
-	.links {
-		max-width: 100%;
-		padding-top: 70px;
+	.links-tudo {
+		overflow: hidden;
+
+		background-image: url(../img/niko-sona.jpg);
+		background-size: cover;
+		background-position: center top;
 	}
 
 	.links-logo {
-		max-width: 80vw;
+		width: 90vw !important;
+	}
+
+	.links-tudo::after {
+		background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(40, 22, 83, 0.7)) no-repeat center center fixed;
+		background-size: cover;
+	}
+
+	.links {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		padding: 20px;
+	}
+
+	.links-sona {
+		display: none;
 	}
 
 	.links-lista {
-		margin-bottom: 70px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		list-style-type: none;
+		gap: 10px;
 	}
 
-	.links-lista li {
-		width: 80vw;
+	.links-lista li a {
+		max-width: 80px;
+		height: 80px;
+
+		font-size: 3.5em;
+		text-align: center;
+		border-radius: 0 0 25px 0;
 	}
+
+	.links-lista li a span {
+		display: none;
+	}
+
+	.links-lista li a:hover {
+		transform: translateX(0);
+	}
+
+	.links-credits {
+		width: auto;
+		text-align: center;
+	}
+
+	@keyframes grid-move { none }
 
 }
 
@@ -1141,4 +1160,36 @@ hr {
 		margin-bottom: 25px;
 	}
 
+	/* página: download de álbum */
+
+	.album-page-corpo {
+		flex-direction: row;
+		gap: 0;
+	}
+
+	.album-info {
+		height: auto;
+		min-height: 600px;
+		width: 700px;
+		margin-top: 15px;
+	}
+
+	.album-info h1 {
+		font-size: 3em;
+	}
+
+@media (max-width: 1200px) {
+
+	.links-logo{
+		width: 380px;
+	}
+
+	.links-lista li a {
+		width: 500px;
+	}
+
+	.links-sona {
+		height: 600px;
+		min-height: auto;
+	}
 }
