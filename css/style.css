@@ -1103,7 +1103,6 @@ hr {
 		flex-direction: row;
 		flex-wrap: wrap;
 		justify-content: center;
-		list-style-type: none;
 		gap: 10px;
 	}
 
