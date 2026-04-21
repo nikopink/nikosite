@@ -549,6 +549,8 @@ a {
 	font-size: 3.5em;
 	margin-bottom: 10px;
 	padding: 5px 20px;
+
+	word-break: break-word;
 }
 
 .album-faixas {
