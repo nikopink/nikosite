@@ -833,6 +833,10 @@ hr {
 	margin-bottom: 25px;
 }
 
+.links-lista {
+	list-style-type: none;
+}
+
 .links-lista li a {
 	display: block;
 	width: 630px;
