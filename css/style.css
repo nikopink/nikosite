@@ -793,7 +793,7 @@ hr {
 
 /* página: links */
 
-.links-tudo {
+.links-tudo, .limpador-tudo {
 	width: 100vw;
 	min-height: 100vh;
 	position: relative;
@@ -809,7 +809,7 @@ hr {
 	animation: grid-move 0.7s linear infinite;
 }
 
-.links-tudo::after {
+.links-tudo::after, .limpador-tudo::after {
 	content: '';
 	position: absolute;
 	top: 0;
@@ -885,6 +885,215 @@ hr {
 
 .links-credits:hover {
 	color: #08f1f5;
+}
+
+/* página: limpador de links */
+
+.limpador {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 30px 0 30px;
+	
+	position: relative;
+	z-index: 2;
+}
+
+.limpador-header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 10px 30px;
+}
+
+.limpador-header a {
+	display: flex;
+}
+
+.limpador-header img {
+	width: 300px;
+}
+
+.limpador-header h1 {
+	color: #ea14ee;
+	font-size: 2.9rem;
+	text-align: center;
+
+	text-shadow: 0 0 10px RGBA(234, 20, 238, 0.3);
+}
+
+.input-section {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.linkCaixa-container {
+	width: 100%;
+	display: flex;
+	gap: 8px;
+}
+
+.linkCaixa-caixa {
+	flex: 1;
+	position: relative;
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+	width: 100%;
+	padding: 10px 45px 10px 14px;
+	font-size: 1.1rem;
+
+	color: #f4f9fa;
+	background-color: black;
+	border-radius: 0 0 30px 0;
+
+	position: relative;
+	z-index: 3;
+
+	border: 2px solid #f4f9fa;
+	outline: none;
+    transition: border-color 0.15s;
+}
+
+input[type="text"]:focus {
+	border-color: #ea14ee; 
+}
+
+.linkApagarCaixa {
+	position: absolute;
+	right: 18px;
+	z-index: 3;
+
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	display: none;
+
+	color: #f4f9fa;
+	font-size: 2rem;
+	text-shadow: 0 0 5px RGBA(234, 20, 238, 0.0);
+	transition: linear 0.15s;
+}
+
+.linkApagarCaixa:hover {
+	color: #ea14ee;
+	text-shadow: 0 0 5px RGBA(234, 20, 238, 0.8);
+}
+
+.linkApagarCaixa.visible {
+	display: flex;
+}
+
+.linkBotaoEnviar {
+	background-color: #f4f9fa;
+	font-size: 1.3rem;
+	font-weight: 600;
+
+	border: none;
+	border-radius: 0 0 30px 0;
+	padding: 0 20px 0 40px;
+	margin-right: -35px;
+
+	position: relative;
+	z-index: 2;
+	right: 35px;
+	cursor: pointer;
+
+	transition: linear 0.15s;
+}
+
+.linkBotaoEnviar:hover {
+	color: #f4f9fa;
+	background-color: #ea14ee;
+}
+
+.linkBotaoEnviar:active {
+	background-color: #c11dc4;
+}
+
+.msgErro {
+	color: red;
+	text-align: center;
+	margin-top: 10px;
+	font-size: 0.9rem;
+}
+
+.result-section {
+	margin-top: 30px;
+	display: none;
+}
+
+.result-section.visible {
+	display: block;
+}
+
+.resultLink {
+	width: calc(100% - 22px);
+	padding: 10px;
+	margin: 5px 0 15px 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+
+	border: 1px solid #f4f9fa;
+	border-radius: 0 0 30px 0;
+	box-shadow: 0 0 15px RGBA(8, 241, 245, 0.0);
+
+	cursor: pointer;
+	transition: linear 0.15s;
+}
+
+.resultLabel {
+	color: #f4f9fa;
+	font-size: 0.8rem;
+}
+
+.linkLimpo {
+	font-family: "Hack", monospace;
+	font-size: 1rem;
+	color: #08f1f5;
+	word-break: break-all;
+	flex: 1;
+
+	transition: linear 0.15s;
+}
+
+.cliqueCopy {
+	font-size: 0.8rem;
+	color: rgba(255, 255, 255, 0.7);
+
+	transition: linear 0.15s;
+}
+
+.resultLink:hover {
+	border: 1px solid #08f1f5;
+	box-shadow: 0 0 15px RGBA(8, 241, 245, 0.3);
+}
+
+.resultLink:hover .linkLimpo {
+	color: #08f1f5;
+}
+
+.resultLink:hover .cliqueCopy {
+	color: #08f1f5;
+}
+
+.resultLink.copied {
+	border: 1px solid #ea14ee;
+	box-shadow: 0 0 15px RGBA(234, 20, 238, 0.2);
+}
+
+.resultLink.copied .linkLimpo {
+	color: #ea14ee;
+}
+
+.resultLink.copied .cliqueCopy {
+	color: #ea14ee;
 }
 
 /*animação*/
@@ -1129,6 +1338,13 @@ hr {
 	}
 
 	@keyframes grid-move { none }
+
+	/* página: limpador de links */
+
+	.limpador-header h1 {
+		font-size: 2.2rem;
+	}
+
 
 }
 
