@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Limpador de Links • Niko</title>
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3/build/web/hack.css">
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self';">
+</head>
+<body>
+	<div class="limpador-tudo">
+
+		<div class="limpador">
+
+			<div class="limpador-header">
+				
+				<a href="../"><img src="../img/logo.png"></a>
+				<h1>Limpador de Links</h1>
+
+			</div>
+
+			<div class="input-section">
+				
+				<div class="linkCaixa-container">
+
+					<div class="linkCaixa-caixa">
+						<input type="text" placeholder="Cole seu link do YouTube aqui" id="linkInput" maxlength="200">
+						<button type="button" id="botaoApagarCaixa" class="linkApagarCaixa" aria-label="Limpar Campo">×</button>
+					</div>
+
+					<button type="button" id="botaoEnviar" class="linkBotaoEnviar">Enviar</button>
+
+				</div>
+			
+			</div>
+
+			<div class="msgErro" id="msgErro"></div>
+
+			<div class="result-section" id="result">
+				
+				<span class="resultLabel">Link do YouTube</span>
+				<div class="resultLink" id="campoLinkLimpo">
+					<span class="linkLimpo" id="valorLinkLimpo">https://www.youtube.com/watch?v=tOhtcCHEcks</span>
+					<span class="cliqueCopy">clique para copiar</span>
+				</div>
+
+				<span class="resultLabel">ID do YouTube</span>
+				<div class="resultLink" id="campoIDLimpo">
+					<span class="linkLimpo" id="valorIDLimpo">tOhtcCHEcks</span>
+					<span class="cliqueCopy">clique para copiar</span>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script>
+  
+		(function () {
+		    'use strict';
+
+		    var YT_REGEX = /^(?:https?:\/\/)?(?:www\.|m\.|music\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/|v\/)|youtu\.be\/)([A-Za-z0-9_-]{11})(?:[?&#][^\s]*)?$/i;
+
+		    var urlInput = document.getElementById('linkInput');
+		    var clearInputBtn = document.getElementById('botaoApagarCaixa');
+		    var cleanBtn = document.getElementById('botaoEnviar');
+		    var errorMsg = document.getElementById('msgErro');
+		    var result = document.getElementById('result');
+
+		    var cleanUrlField = document.getElementById('campoLinkLimpo');
+		    var videoIdField = document.getElementById('campoIDLimpo');
+
+		    var cleanUrlValue = document.getElementById('valorLinkLimpo');
+		    var videoIdValue = document.getElementById('valorIDLimpo');
+
+		    function extractVideoId(input) {
+		      var trimmed = (input || '').trim();
+		      if (!trimmed) return null;
+		      var match = trimmed.match(YT_REGEX);
+		      return match ? match[1] : null;
+		    }
+
+		    function resetField(field) {
+		      field.classList.remove('copied');
+		      field.querySelector('.cliqueCopy').textContent = 'clique para copiar';
+		    }
+
+		    function showResult(videoId) {
+		      var cleanUrl = 'https://www.youtube.com/watch?v=' + videoId;
+
+		      cleanUrlValue.textContent = cleanUrl;
+		      videoIdValue.textContent = videoId;
+
+		      cleanUrlField.dataset.copy = cleanUrl;
+		      videoIdField.dataset.copy = videoId;
+
+		      [cleanUrlField, videoIdField].forEach(resetField);
+
+		      result.classList.add('visible');
+		      errorMsg.textContent = '';
+		    }
+
+		    function clearResult() {
+		      result.classList.remove('visible');
+		    }
+
+		    function handleClean() {
+		      var id = extractVideoId(urlInput.value);
+		      if (!id) {
+		        clearResult();
+		        errorMsg.textContent = 'Link inválido. Use um link do YouTube válido (youtube.com/watch?v=..., youtu.be/...).';
+		        return;
+		      }
+		      showResult(id);
+		    }
+
+		    function updateClearButtonVisibility() {
+		      if (urlInput.value.length > 0) {
+		        clearInputBtn.classList.add('visible');
+		      } else {
+		        clearInputBtn.classList.remove('visible');
+		      }
+		    }
+
+		    function handleClearInput() {
+		      urlInput.value = '';
+		      updateClearButtonVisibility();
+		      clearResult();
+		      errorMsg.textContent = '';
+		      urlInput.focus();
+		    }
+
+		    function copyToClipboard(text) {
+		      if (navigator.clipboard && window.isSecureContext) {
+		        return navigator.clipboard.writeText(text);
+		      }
+		      return new Promise(function (resolve, reject) {
+		        var ta = document.createElement('textarea');
+		        ta.value = text;
+		        ta.style.position = 'fixed';
+		        ta.style.top = '-9999px';
+		        ta.setAttribute('readonly', '');
+		        document.body.appendChild(ta);
+		        ta.select();
+		        try {
+		          var ok = document.execCommand('copy');
+		          document.body.removeChild(ta);
+		          ok ? resolve() : reject(new Error('execCommand falhou'));
+		        } catch (e) {
+		          document.body.removeChild(ta);
+		          reject(e);
+		        }
+		      });
+		    }
+
+		    function handleCopyClick(e) {
+		      var field = e.currentTarget;
+		      var text = field.dataset.copy;
+		      if (!text) return;
+
+		      copyToClipboard(text).then(function () {
+		        var hint = field.querySelector('.cliqueCopy');
+		        field.classList.add('copied');
+		        hint.textContent = 'copiado!';
+		        setTimeout(function () {
+		          field.classList.remove('copied');
+		          hint.textContent = 'clique para copiar';
+		        }, 2000);
+		      }).catch(function () {
+		        var hint = field.querySelector('.cliqueCopy');
+		        hint.textContent = 'falha ao copiar';
+		        setTimeout(function () {
+		          hint.textContent = 'clique para copiar';
+		        }, 2500);
+		      });
+		    }
+
+		    cleanBtn.addEventListener('click', handleClean);
+		    urlInput.addEventListener('keydown', function (e) {
+		      if (e.key === 'Enter') handleClean();
+		      if (e.key === 'Escape') handleClearInput();
+		    });
+		    urlInput.addEventListener('input', updateClearButtonVisibility);
+		    clearInputBtn.addEventListener('click', handleClearInput);
+
+		    [cleanUrlField, videoIdField].forEach(function (field) {
+		      field.addEventListener('click', handleCopyClick);
+		    });
+
+		    updateClearButtonVisibility();
+		  })();
+	
+	</script>
+
+</body>
+</html>
