@@ -79,9 +79,42 @@
 				</div>
 
 				<div class="home-right">
-					<legend>
-						<a href="https://bsky.app/profile/bernacha.bsky.social" target="_blank">Arte por bernacha<br><i>@bernacha.bsky.social</i></a>
-					</legend>
+
+					<div class="home-slide" >
+						<img src="img/galeria/bernacha.webp" onclick="plusSlides(1)">
+						<legend>
+							<a href="https://bsky.app/profile/bernacha.bsky.social" target="_blank">Arte por Bernachá<br><i>@bernacha.bsky.social</i></a>
+						</legend>
+					</div>
+
+					<div class="home-slide" >
+						<img src="img/galeria/sumatsuki.webp" onclick="plusSlides(1)">
+						<legend>
+							<a href="https://sumatsuki.carrd.co" target="_blank">Arte por Sumatsuki<br><i>sumatsuki.carrd.co</i></a>
+						</legend>
+					</div>
+
+					<div class="home-slide" >
+						<img src="img/galeria/dimitri.webp" onclick="plusSlides(1)">
+						<legend>
+							<a href="https://x.com/tomochingus" target="_blank">Arte por Dimitri<br><i>@tomochingus@x.com</i></a>
+						</legend>
+					</div>
+
+					<div class="home-slide" >
+						<img src="img/galeria/mfc.webp" onclick="plusSlides(1)">
+						<legend>
+							<a href="https://bsky.app/profile/maxfazcomics.bsky.social" target="_blank">Arte por Matt (MFC)<br><i>@maxfazcomics.bsky.social</i></a>
+						</legend>
+					</div>
+
+					<div class="home-slide" >
+						<img src="img/galeria/riskysimon.webp" onclick="plusSlides(1)">
+						<legend>
+							<a href="#">Arte por RiskySimon</a>
+						</legend>
+					</div>
+
 				</div>
 
 			</div>
@@ -116,6 +149,34 @@
 		</span>
 
 	</div>
+
+	<script>
+		
+		let slideIndex = Math.floor(Math.random() * 5) + 1;
+		showSlides(slideIndex);
+
+		// Next/previous controls
+		function plusSlides(n) {
+		  showSlides(slideIndex += n);
+		}
+
+		// Thumbnail image controls
+		function currentSlide(n) {
+		  showSlides(slideIndex = n);
+		}
+
+		function showSlides(n) {
+		  let i;
+		  let slides = document.getElementsByClassName("home-slide");
+		  if (n > slides.length) {slideIndex = 1}
+		  if (n < 1) {slideIndex = slides.length}
+		  for (i = 0; i < slides.length; i++) {
+		    slides[i].style.display = "none";
+		  }
+		  slides[slideIndex-1].style.display = "block";
+		} 
+
+	</script>
 
 </body>
 </html>
