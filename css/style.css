@@ -344,34 +344,46 @@ a {
 
 /*parte da direita*/
 
-.home-right {
+.home-right:hover {
+	cursor: pointer;
+}
+
+.home-slide {
 	width: calc(40% - 50px);
 	min-height: calc(100% - 50px);
-	height: calc(100vh - 155px);
+	height: calc(100vh - 150px);
 	position: absolute;
 	right: 20px;
 	top: 20px;
+}
+
+.home-slide img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: top center;
 	border-bottom-right-radius: 100px;
-
-	background: url(../img/niko-sona.jpg) no-repeat;
-	background-size: cover;
-	background-position: top center;
 }
 
-.home-right legend {
+.home-slide legend {
 	text-align: right;
-	padding: 5px 8px;
 	font-size: 10pt;
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	padding: 5px 10px 50px 55px;
+
+	background: radial-gradient(farthest-corner at top right, rgba(0, 0, 0, 0.3) 30%, transparent 75%);
 }
 
-.home-right legend a {
-	color: rgba(255, 255, 255, 0.5);
-	text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+.home-slide legend a {
+	color: #f4f9fa;
 	transition: 0.1s ease-in-out;
 }
 
-.home-right legend a:hover {
-	color: rgba(255, 255, 255, 1.0);
+.home-slide legend a:hover {
+	color: #ea14ee;
 }
 
 /*corpo: página de músicas*/
@@ -1353,9 +1365,9 @@ input[type="text"]:focus {
 		width: 100%;
 	}
 
-	.home-right {
+	.home-slide {
 		width: 100%;
-		height: 750px;
+		height: 100%;
 		position: relative;
 		top: 0;
 		left: 0;
@@ -1413,4 +1425,5 @@ input[type="text"]:focus {
 		height: 600px;
 		min-height: auto;
 	}
+
 }
